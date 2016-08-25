@@ -16,9 +16,7 @@
 
 package io.fabric8.openshift.client.dsl;
 
-import io.fabric8.kubernetes.client.dsl.Timeoutable;
-
 public interface TimeoutInputStreamable<T> extends
-  Timeoutable<InputStreamable<T>>,
+  BuildConfigReadWriteTimeoutable<InputStreamable<T>>,
   InputStreamable<T> {
 }

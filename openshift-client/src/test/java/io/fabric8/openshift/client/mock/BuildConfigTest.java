@@ -140,6 +140,24 @@ public class BuildConfigTest {
     fail("Expected exception");
   }
 
+  public void testBinaryBuildWithWriteTimeout() {
+    server.expect().post().delay(200).withPath("/oapi/v1/namespaces/ns1/buildconfigs/bc2/instantiatebinary?commit=")
+      .andReturn(201, new BuildBuilder()
+        .withNewMetadata().withName("bc2").endMetadata().build()).once();
+
+    OpenShiftClient client = server.getOpenshiftClient();
+    InputStream dummy = new ByteArrayInputStream("".getBytes() );
+
+    try {
+      client.buildConfigs().inNamespace("ns1").withName("bc2").instantiateBinary()
+        .withTimeout(30000, 100,TimeUnit.MILLISECONDS)
+        .fromInputStream(dummy);
+    } catch (KubernetesClientException e) {
+      assertEquals(SocketTimeoutException.class, e.getCause().getClass());
+      return;
+    }
+    fail("Expected exception");
+  }
 
   @Test
   public void testDelete() {

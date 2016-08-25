@@ -40,19 +40,19 @@ public class BuildConfigHandler implements ResourceHandler<BuildConfig, BuildCon
   @Override
   public BuildConfig create(OkHttpClient client, Config config, String namespace, BuildConfig item) {
     OpenShiftConfig osConfig = OpenShiftConfig.wrap(config);
-    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildTimeout(), TimeUnit.MILLISECONDS).create();
+    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildReadTimeout(), osConfig.getBuildWriteTimeout(), TimeUnit.MILLISECONDS).create();
   }
 
   @Override
   public BuildConfig replace(OkHttpClient client, Config config, String namespace, BuildConfig item) {
     OpenShiftConfig osConfig = OpenShiftConfig.wrap(config);
-    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildTimeout(), TimeUnit.MILLISECONDS).replace(item);
+    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildReadTimeout(), osConfig.getBuildWriteTimeout(), TimeUnit.MILLISECONDS).replace(item);
   }
 
   @Override
   public BuildConfig reload(OkHttpClient client, Config config, String namespace, BuildConfig item) {
     OpenShiftConfig osConfig = OpenShiftConfig.wrap(config);
-    return new BuildConfigOperationsImpl(client, osConfig, null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildTimeout(), TimeUnit.MILLISECONDS).fromServer().get();
+    return new BuildConfigOperationsImpl(client, osConfig, null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildReadTimeout(), osConfig.getBuildWriteTimeout(), TimeUnit.MILLISECONDS).fromServer().get();
   }
 
   @Override
@@ -63,6 +63,6 @@ public class BuildConfigHandler implements ResourceHandler<BuildConfig, BuildCon
   @Override
   public Boolean delete(OkHttpClient client, Config config, String namespace, BuildConfig item) {
     OpenShiftConfig osConfig = OpenShiftConfig.wrap(config);
-    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildTimeout(), TimeUnit.MILLISECONDS).delete(item);
+    return new BuildConfigOperationsImpl(client, OpenShiftConfig.wrap(config), null, namespace, null, true, item, null, false, -1, new TreeMap<String, String>(), new TreeMap<String, String>(), new TreeMap<String, String[]>(), new TreeMap<String, String[]>(), new TreeMap<String, String>(), null, null, null, null, null, null, null, null, null, osConfig.getBuildReadTimeout(), osConfig.getBuildWriteTimeout(),TimeUnit.MILLISECONDS).delete(item);
   }
 }
